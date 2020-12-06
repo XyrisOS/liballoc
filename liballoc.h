@@ -1,23 +1,8 @@
 #ifndef _LIBALLOC_H
 #define _LIBALLOC_H
 
-
-
-// If we are told to not define our own size_t, then we
-// skip the define.
-#ifndef _ALLOC_SKIP_DEFINE
-
-#ifndef _HAVE_SIZE_T
-#define _HAVE_SIZE_T
-typedef	unsigned int	size_t;
-#endif
-
-
-#ifndef	NULL
-#define NULL		0
-#endif
-
-#endif
+#include <stdint.h>
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,7 +38,7 @@ struct	boundary_tag
  * \return 0 if the lock was acquired successfully. Anything else is
  * failure.
  */
-extern int liballoc_lock();
+extern int liballoc_lock(void);
 
 /** This function unlocks what was previously locked by the liballoc_lock
  * function.  If it disabled interrupts, it enables interrupts. If it
@@ -61,7 +46,7 @@ extern int liballoc_lock();
  *
  * \return 0 if the lock was successfully released.
  */
-extern int liballoc_unlock();
+extern int liballoc_unlock(void);
 
 /** This is the hook into the local system which allocates pages. It
  * accepts an integer parameter which is the number of pages

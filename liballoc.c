@@ -31,7 +31,7 @@ unsigned int l_inuse = 0;			//< The amount of memory in use (malloc'ed).
 
 static int l_initialized = 0;			//< Flag to indicate initialization.	
 static int l_pageSize  = 4096;			//< Individual page size
-static int l_pageCount = 16;			//< Minimum number of pages to allocate.
+static unsigned int l_pageCount = 16;	//< Minimum number of pages to allocate.
 
 
 // ***********   HELPER FUNCTIONS  *******************************
@@ -51,11 +51,11 @@ static inline int getexp( unsigned int size )
 	}
 		
 		
-	int shift = MINEXP;
+	unsigned int shift = MINEXP;
 
 	while ( shift < MAXEXP )
 	{
-		if ( (1<<shift) > size ) break;
+		if ( (1u<<shift) > size ) break;
 		shift += 1;
 	}
 
@@ -69,7 +69,7 @@ static inline int getexp( unsigned int size )
 
 static void* 	liballoc_memset(void* s, int c, size_t n)
 {
-	int i;
+	size_t i;
 	for ( i = 0; i < n ; i++)
 		((char*)s)[i] = c;
 	
@@ -507,7 +507,7 @@ void*   realloc(void *p, size_t size)
 {
 	void *ptr;
 	struct boundary_tag *tag;
-	int real_size;
+	size_t real_size;
 	
 	if ( size == 0 )
 	{
@@ -517,7 +517,7 @@ void*   realloc(void *p, size_t size)
 	if ( p == NULL ) return malloc( size );
 
 	liballoc_lock();		// lockit
-		tag = (struct boundary_tag*)(p - sizeof( struct boundary_tag ));
+		tag = (struct boundary_tag*)((uintptr_t)p - sizeof( struct boundary_tag ));
 		real_size = tag->size;
 	liballoc_unlock();
 
