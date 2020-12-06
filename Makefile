@@ -15,24 +15,25 @@ SHARED_1_1 = liballoc_1_1.so
 
 # ---------  GENERIC MAKE RULES --------------------
 
-all: static_1_0 shared_1_0 static_1_1 shared_1_1
-static: static_1_0 static_1_1
-shared: shared_1_0 shared_1_1
-panix: static_1_0
+.PHONY: all static shared panix clean
+all: $(STATIC_1_0) $(STATIC_1_1) $(SHARED_1_0) $(SHARED_1_1)
+static: $(STATIC_1_0) $(STATIC_1_1)
+shared: $(SHARED_1_0) $(SHARED_1_1)
+panix: $(STATIC_1_0)
 
-static_1_0: liballoc.c
+$(STATIC_1_0): liballoc.c
 	gcc $(HEADERPATH) $(CFLAGS) -static -c $<
-	ar -rcv $(STATIC_1_0) *.o
+	ar -rcv $@ *.o
 
-shared_1_0: liballoc.c
-	gcc $(HEADERPATH) $(CFLAGS) -shared $< -o $(SHARED_1_0)
+$(SHARED_1_0): liballoc.c
+	gcc $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
-static_1_1: liballoc_1_1.c
+$(STATIC_1_1): liballoc_1_1.c
 	gcc $(HEADERPATH) $(CFLAGS) -static -c $<
-	ar -rcv $(STATIC_1_1) *.o
+	ar -rcv $@ *.o
 
-shared_1_1: liballoc_1_1.c
-	gcc $(HEADERPATH) $(CFLAGS) -shared $< -o $(SHARED_1_1)
+$(SHARED_1_1): liballoc_1_1.c
+	gcc $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
 clean:
 	rm -f ./*.o
