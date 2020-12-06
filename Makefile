@@ -18,6 +18,7 @@ SHARED_1_1 = liballoc_1_1.so
 all: static_1_0 shared_1_0 static_1_1 shared_1_1
 static: static_1_0 static_1_1
 shared: shared_1_0 shared_1_1
+panix: static_1_0
 
 static_1_0:
 	gcc $(HEADERPATH) $(CFLAGS) -static -c liballoc.c
