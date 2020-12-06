@@ -3,7 +3,7 @@
 
 # --------- FLAGS AND VARIABLES --------------------
 
-CFLAGS = -O2 -nostdlib -nodefaultlibs -fno-builtin -fPIC -Wall
+# CFLAGS, CC, and AR are exported by the root Makefile
 HEADERPATH = -I./
 
 # ---------  LIBALLOC BINARIES  --------------------
@@ -22,18 +22,18 @@ shared: $(SHARED_1_0) $(SHARED_1_1)
 panix: $(STATIC_1_0)
 
 $(STATIC_1_0): liballoc.c
-	gcc $(HEADERPATH) $(CFLAGS) -static -c $<
-	ar -rcv $@ *.o
+	$(CC) $(HEADERPATH) $(CFLAGS) -static -c $<
+	$(AR) -rcv $@ *.o
 
 $(SHARED_1_0): liballoc.c
-	gcc $(HEADERPATH) $(CFLAGS) -shared $< -o $@
+	$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
 $(STATIC_1_1): liballoc_1_1.c
-	gcc $(HEADERPATH) $(CFLAGS) -static -c $<
-	ar -rcv $@ *.o
+	$(CC) $(HEADERPATH) $(CFLAGS) -static -c $<
+	$(AR) -rcv $@ *.o
 
 $(SHARED_1_1): liballoc_1_1.c
-	gcc $(HEADERPATH) $(CFLAGS) -shared $< -o $@
+	$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
 clean:
 	rm -f ./*.o
