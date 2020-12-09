@@ -36,6 +36,7 @@ $(SHARED_1_1): liballoc_1_1.c
 	$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
 clean:
-	rm -f ./*.o
-	rm -f ./*.a
-	rm -f ./*.so
+	@rm -f ./*.o
+	@rm -f ./*.a
+	@rm -f ./*.so
+	@printf "$(COLOR_OK)Cleaned liballoc.$(COLOR_NONE)\n"
