@@ -22,18 +22,24 @@ shared: $(SHARED_1_0) $(SHARED_1_1)
 panix: $(STATIC_1_0)
 
 $(STATIC_1_0): liballoc.c
-	$(CC) $(HEADERPATH) $(CFLAGS) -static -c $<
-	$(AR) -rcv $@ *.o
+	@printf "$(COLOR_COM)(CC)$(COLOR_NONE)\t$@\n"
+	@$(CC) $(HEADERPATH) $(CFLAGS) -static -c $<
+	@printf "$(COLOR_COM)(AR)$(COLOR_NONE)\t$@\n"
+	@$(AR) -rc $@ *.o
 
 $(SHARED_1_0): liballoc.c
-	$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
+	@printf "$(COLOR_COM)(CC)$(COLOR_NONE)\t$@\n"
+	@$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
 $(STATIC_1_1): liballoc_1_1.c
-	$(CC) $(HEADERPATH) $(CFLAGS) -static -c $<
-	$(AR) -rcv $@ *.o
+	@printf "$(COLOR_COM)(CC)$(COLOR_NONE)\t$@\n"
+	@$(CC) $(HEADERPATH) $(CFLAGS) -static -c $<
+	@printf "$(COLOR_COM)(AR)$(COLOR_NONE)\t$@\n"
+	@$(AR) -rc $@ *.o
 
 $(SHARED_1_1): liballoc_1_1.c
-	$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
+	@printf "$(COLOR_COM)(CC)$(COLOR_NONE)\t$@\n"
+	@$(CC) $(HEADERPATH) $(CFLAGS) -shared $< -o $@
 
 clean:
 	@rm -f ./*.o
