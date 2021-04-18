@@ -38,7 +38,7 @@ int liballoc_unlock()
 	return 0;
 }
 
-void* liballoc_alloc( int pages )
+void* liballoc_alloc( unsigned int pages )
 {
 	if ( page_size < 0 ) page_size = getpagesize();
 	unsigned int size = pages * page_size;

@@ -55,7 +55,7 @@ extern int liballoc_unlock(void);
  * \return NULL if the pages were not allocated.
  * \return A pointer to the allocated memory.
  */
-extern void* liballoc_alloc(int);
+extern void* liballoc_alloc(unsigned int);
 
 /** This frees previously allocated memory. The void* parameter passed
  * to the function is the exact same value returned from a previous
@@ -65,7 +65,7 @@ extern void* liballoc_alloc(int);
  *
  * \return 0 if the memory was successfully freed.
  */
-extern int liballoc_free(void*,int);
+extern int liballoc_free(void*, unsigned int);
 
        
 
