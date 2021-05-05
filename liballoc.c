@@ -2,7 +2,13 @@
 
 /**  Durand's Ridiculously Amazing Super Duper Memory functions.  */
 
-//#define DEBUG
+#ifdef DEBUG
+    // Only keep debug if LIBALLOC_DEBUG
+    // is also defined, otherwise unset.
+    #ifndef LIBALLOC_DEBUG
+    #undef DEBUG
+    #endif
+#endif
 
 #define LIBALLOC_MAGIC	0xc001c0de
 #define MAXCOMPLETE		5
